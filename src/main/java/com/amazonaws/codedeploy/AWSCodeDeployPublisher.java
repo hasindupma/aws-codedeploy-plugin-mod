@@ -210,7 +210,8 @@ public class AWSCodeDeployPublisher extends Publisher implements SimpleBuildStep
                 aws = AWSClients.fromDefaultCredentialChain(
                         this.region,
                         this.proxyHost,
-                        this.proxyPort);
+                        this.proxyPort,
+                        this.profile);
             } else {
                 aws = AWSClients.fromBasicCredentials(
                         this.region,
@@ -781,5 +782,8 @@ public class AWSCodeDeployPublisher extends Publisher implements SimpleBuildStep
 
     public String getSubdirectoryFromEnv() {
         return Util.replaceMacro(this.subdirectory, envVars);
+    }
+    public String getProfileFromEnv() {
+        return Util.replaceMacro(this.profile, envVars);
     }
 }

@@ -39,6 +39,7 @@ import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
 import com.amazonaws.services.securitytoken.model.AssumeRoleRequest;
 import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import com.amazonaws.services.securitytoken.model.Credentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 
 /**
  * @author gibbon
@@ -57,34 +58,43 @@ public class AWSClients {
     private final String proxyHost;
     private final int proxyPort;
 
-    public AWSClients(String region, AWSCredentials credentials, String proxyHost, int proxyPort) {
+    public AWSClients(String region, AWSCredentials credentials, String proxyHost, int proxyPort , String profile) {
         this.region = region;
         this.proxyHost = proxyHost;
         this.proxyPort = proxyPort;
+        this.profile = profile;
 
+        AWSCredentialsProvider provider = new ProfileCredentialsProvider(profile)    
         //setup proxy connection:
         ClientConfiguration clientCfg = new ClientConfiguration();
         if (proxyHost != null && proxyPort > 0 ) {
             clientCfg.setProxyHost(proxyHost);
             clientCfg.setProxyPort(proxyPort);
         }
-
-        this.s3 = credentials != null ? new AmazonS3Client(credentials, clientCfg) : new AmazonS3Client(clientCfg);
+        if (profile != null){
+            this.s3 = credentials != null ? new AmazonS3Client(provider, clientCfg) : new AmazonS3Client(clientCfg);
+        this.codedeploy = credentials != null ? new AmazonCodeDeployClient(provider, clientCfg) : new AmazonCodeDeployClient(clientCfg);
+        codedeploy.setRegion(Region.getRegion(Regions.fromName(this.region)));
+        s3.setRegion(Region.getRegion(Regions.fromName(this.region)));
+        }
+        else { 
+            this.s3 = credentials != null ? new AmazonS3Client(credentials, clientCfg) : new AmazonS3Client(clientCfg);
         this.codedeploy = credentials != null ? new AmazonCodeDeployClient(credentials, clientCfg) : new AmazonCodeDeployClient(clientCfg);
         codedeploy.setRegion(Region.getRegion(Regions.fromName(this.region)));
         s3.setRegion(Region.getRegion(Regions.fromName(this.region)));
+        }
     }
     
-    public static AWSClients fromDefaultCredentialChain(String region, String proxyHost, int proxyPort) {
-        return new AWSClients(region, null, proxyHost, proxyPort);
+    public static AWSClients fromDefaultCredentialChain(String region, String proxyHost, int proxyPort , String profile) {
+        return new AWSClients(region, null, proxyHost, proxyPort, profile);
     }
     
     public static AWSClients fromIAMRole(String region, String iamRole, String externalId, String proxyHost, int proxyPort) {
-        return new AWSClients(region, getCredentials(iamRole, externalId), proxyHost, proxyPort);
+        return new AWSClients(region, getCredentials(iamRole, externalId), proxyHost, proxyPort, profile);
     }
     
     public static AWSClients fromBasicCredentials(String region, String awsAccessKey, String awsSecretKey, String proxyHost, int proxyPort) {
-        return new AWSClients(region, new BasicAWSCredentials(awsAccessKey, awsSecretKey), proxyHost, proxyPort);
+        return new AWSClients(region, new BasicAWSCredentials(awsAccessKey, awsSecretKey), proxyHost, proxyPort, profile);
     }
 
     /**
