@@ -113,11 +113,11 @@ public class AWSClients{
         return new AWSClients(region, null, proxyHost, proxyPort, profile);
     }
     
-    public static AWSClients fromIAMRole(String region, String iamRole, String externalId, String proxyHost, int proxyPort) {
+    public static AWSClients fromIAMRole(String region, String iamRole, String externalId, String proxyHost, int proxyPort, String profile) {
         return new AWSClients(region, getCredentials(iamRole, externalId), proxyHost, proxyPort, profile);
     }
     
-    public static AWSClients fromBasicCredentials(String region, String awsAccessKey, String awsSecretKey, String proxyHost, int proxyPort) {
+    public static AWSClients fromBasicCredentials(String region, String awsAccessKey, String awsSecretKey, String proxyHost, int proxyPort, String profile ) {
         return new AWSClients(region, new BasicAWSCredentials(awsAccessKey, awsSecretKey), proxyHost, proxyPort, profile);
     }
 
