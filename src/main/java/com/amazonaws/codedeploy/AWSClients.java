@@ -13,6 +13,7 @@
  * permissions and limitations under the License.
  */
 package com.amazonaws.codedeploy;
+package com.amazonaws.auth.profile;
 
 import static org.apache.commons.lang.StringUtils.isEmpty;
 
@@ -39,7 +40,7 @@ import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
 import com.amazonaws.services.securitytoken.model.AssumeRoleRequest;
 import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import com.amazonaws.services.securitytoken.model.Credentials;
-import com.amazonaws.auth.profile.*;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 
 /**
  * @author gibbon
