@@ -81,13 +81,13 @@ public class AWSClients{
     private final String region;
     private final String proxyHost;
     private final int proxyPort;
-    private final String profile;
+ //   private final String profile;
 
-    public AWSClients(String region, AWSCredentials credentials, String proxyHost, int proxyPort , String profile) {
+    public AWSClients(String region, AWSCredentials credentials, String proxyHost, int proxyPort) {
         this.region = region;
         this.proxyHost = proxyHost;
         this.proxyPort = proxyPort;
-        this.profile = profile;
+ //       this.profile = profile;
         
         //setup proxy connection:
         ClientConfiguration clientCfg = new ClientConfiguration();
@@ -103,16 +103,16 @@ public class AWSClients{
         
     }
     
-    public static AWSClients fromDefaultCredentialChain(String region, String proxyHost, int proxyPort , String profile) {
-        return new AWSClients(region, null, proxyHost, proxyPort, profile);
+    public static AWSClients fromDefaultCredentialChain(String region, String proxyHost, int proxyPort) {
+        return new AWSClients(region, null, proxyHost, proxyPort);
     }
     
-    public static AWSClients fromIAMRole(String region, String iamRole, String externalId, String proxyHost, int proxyPort, String profile) {
-        return new AWSClients(region, getCredentials(iamRole, externalId), proxyHost, proxyPort, profile);
+    public static AWSClients fromIAMRole(String region, String iamRole, String externalId, String proxyHost, int proxyPort) {
+        return new AWSClients(region, getCredentials(iamRole, externalId), proxyHost, proxyPort);
     }
     
-    public static AWSClients fromBasicCredentials(String region, String awsAccessKey, String awsSecretKey, String proxyHost, int proxyPort, String profile ) {
-        return new AWSClients(region, new BasicAWSCredentials(awsAccessKey, awsSecretKey), proxyHost, proxyPort, profile);
+    public static AWSClients fromBasicCredentials(String region, String awsAccessKey, String awsSecretKey, String proxyHost, int proxyPort) {
+        return new AWSClients(region, new BasicAWSCredentials(awsAccessKey, awsSecretKey), proxyHost, proxyPort);
     }
 
     /**
