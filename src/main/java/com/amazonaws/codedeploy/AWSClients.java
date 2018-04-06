@@ -58,14 +58,14 @@ public class AWSClients{
 
        AWSCredentialsProvider credentialsProvider = new ProfileCredentialsProvider();
 
-        if (credentialsProvider.getCredentials() == null) {
+       /* if (credentialsProvider.getCredentials() == null) {
             File configFile = new File(System.getProperty("user.home"), ".aws/config");
             throw new RuntimeException("No AWS security credentials found:\n"
                     + "Make sure you've configured your credentials in: " + configFile.getAbsolutePath() + "\n"
                     + "For more information on configuring your credentials, see "
                     + "http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html");
         }
-
+       )*/
 
 
 
