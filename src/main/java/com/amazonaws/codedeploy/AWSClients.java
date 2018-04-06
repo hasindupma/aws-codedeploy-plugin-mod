@@ -13,7 +13,7 @@
  * permissions and limitations under the License.
  */
 package com.amazonaws.codedeploy;
-package com.amazonaws.auth;
+
 
 
 import static org.apache.commons.lang.StringUtils.isEmpty;
@@ -47,7 +47,7 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
  * @author gibbon
  */
 
-/*public class AWSStaticCredentialsProvider implements AWSCredentialsProvider {
+public class AWSStaticCredentialsProvider implements AWSCredentialsProvider {
 
     private final AWSCredentials credentials;
 
@@ -64,27 +64,13 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 
 }
 
-*/
 
-public abstract class AWSClients implements AWSCredentialsProvider {
+
+public class AWSClients{
     /**
      * Index in the colon-separated ARN that contains the account id
      * Sample ARN: arn:aws:iam::123456789012:user/David
      **/
-
-   private final AWSCredentials credentials;
-
-    public AWSStaticCredentialsProvider(AWSCredentials credentials) {
-        this.credentials = ValidationUtils.assertNotNull(credentials, "credentials");
-    }
-
-    public AWSCredentials getCredentials() {
-        return credentials;
-    }
-
-    public void refresh() {
-    }
-
     private static final int ARN_ACCOUNT_ID_INDEX = 4;
 
     public final AmazonCodeDeployClient codedeploy;
