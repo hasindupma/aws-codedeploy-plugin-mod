@@ -56,7 +56,7 @@ public class AWSClients{
      * Sample ARN: arn:aws:iam::123456789012:user/David
      **/
 
-       AWSCredentialsProvider credentialsProvider = new ProfileCredentialsProvider();
+       AWSCredentialsProvider credentialsProvider = new ProfileCredentialsProvider("pre");
 
        /* if (credentialsProvider.getCredentials() == null) {
             File configFile = new File(System.getProperty("user.home"), ".aws/config");
