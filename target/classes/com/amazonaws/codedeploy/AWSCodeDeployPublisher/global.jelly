@@ -1,0 +1,23 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <f:section title="AWS CodeDeploy Credentials">
+      <f:description>
+        If keys are not specified, the plugin will use the default credentials providers and pull from one of:
+        Environment variables, credentials profile, or IAM instance role. The latter is recommended if running on an EC2
+        instance.
+      </f:description>
+
+      <f:entry title="AWS Access Key" field="awsAccessKey">
+        <f:textbox />
+      </f:entry>
+      <f:entry title="AWS Secret Key" field="awsSecretKey">
+        <f:password/>
+      </f:entry>
+      <f:entry title="Proxy Host" field="proxyHost">
+        <f:textbox default="" />
+      </f:entry>
+      <f:entry title="Proxy Port" field="proxyPort">
+        <f:textbox default="" />
+      </f:entry>
+  </f:section>
+</j:jelly>
