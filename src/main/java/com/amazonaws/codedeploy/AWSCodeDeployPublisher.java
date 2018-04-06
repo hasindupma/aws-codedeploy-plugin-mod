@@ -163,6 +163,7 @@ public class AWSCodeDeployPublisher extends Publisher implements SimpleBuildStep
         this.awsSecretKey = awsSecretKey;
         this.iamRoleArn = iamRoleArn;
         this.deploymentGroupAppspec = deploymentGroupAppspec;
+        this.profile = profile;
 
         if (waitForCompletion != null && waitForCompletion) {
             this.waitForCompletion = waitForCompletion;
