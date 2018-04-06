@@ -15,9 +15,6 @@
   <f:entry title="S3 Bucket" field="s3bucket">
     <f:textbox />
   </f:entry>
-   <f:entry title="Profile" field="profile">
-    <f:textbox />
-  </f:entry>
   <f:entry title="S3 Prefix" field="s3prefix">
     <f:textbox default="" />
   </f:entry>
