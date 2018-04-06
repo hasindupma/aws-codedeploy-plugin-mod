@@ -53,6 +53,7 @@ public class AWSClients {
 
     public final AmazonCodeDeployClient codedeploy;
     public final AmazonS3Client         s3;
+    public final AWSCredentialsProvider provider;
 
     private final String region;
     private final String proxyHost;
@@ -65,7 +66,7 @@ public class AWSClients {
         this.proxyPort = proxyPort;
         this.profile = profile;
 
-        AWSCredentialsProvider provider = new ProfileCredentialsProvider(profile);    
+        provider = new ProfileCredentialsProvider(profile);    
         //setup proxy connection:
         ClientConfiguration clientCfg = new ClientConfiguration();
         if (proxyHost != null && proxyPort > 0 ) {
