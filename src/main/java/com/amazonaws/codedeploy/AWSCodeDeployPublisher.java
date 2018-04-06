@@ -212,7 +212,7 @@ public class AWSCodeDeployPublisher extends Publisher implements SimpleBuildStep
                         this.region,
                         this.proxyHost,
                         this.proxyPort,
-                        this.profile);
+                        );
             } else {
                 aws = AWSClients.fromBasicCredentials(
                         this.region,
