@@ -57,6 +57,7 @@ public class AWSClients {
     private final String region;
     private final String proxyHost;
     private final int proxyPort;
+    private final int profile;
 
     public AWSClients(String region, AWSCredentials credentials, String proxyHost, int proxyPort , String profile) {
         this.region = region;
