@@ -137,7 +137,9 @@ public class AWSCodeDeployPublisher extends Publisher implements SimpleBuildStep
             String proxyHost,
             int proxyPort,
             String excludes,
-            String subdirectory) {
+            String subdirectory,
+            Steing profile
+            ) {
 
         this.externalId = externalId;
         this.applicationName = applicationName;
@@ -680,7 +682,9 @@ public class AWSCodeDeployPublisher extends Publisher implements SimpleBuildStep
     public String getS3bucket() {
         return s3bucket;
     }
-
+  public String getProfile() {
+        return profile;
+    }
     public String getS3prefix() {
         return s3prefix;
     }
