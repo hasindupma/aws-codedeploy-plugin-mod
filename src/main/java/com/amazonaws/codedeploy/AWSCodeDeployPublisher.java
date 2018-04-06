@@ -138,7 +138,7 @@ public class AWSCodeDeployPublisher extends Publisher implements SimpleBuildStep
             int proxyPort,
             String excludes,
             String subdirectory,
-            Steing profile
+            String profile
             ) {
 
         this.externalId = externalId;
