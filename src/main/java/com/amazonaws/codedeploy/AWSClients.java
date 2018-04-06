@@ -13,7 +13,7 @@
  * permissions and limitations under the License.
  */
 package com.amazonaws.codedeploy;
-package com.amazonaws.auth.profile;
+
 
 import static org.apache.commons.lang.StringUtils.isEmpty;
 
@@ -66,8 +66,7 @@ public class AWSClients {
         this.proxyHost = proxyHost;
         this.proxyPort = proxyPort;
         this.profile = profile;
-config.setCredentialsProvider(new ProfileCredentialsProvider("credentials.properties", "myprofile"));
-        provider = new ProfileCredentialsProvider(profile);    
+        
         //setup proxy connection:
         ClientConfiguration clientCfg = new ClientConfiguration();
         if (proxyHost != null && proxyPort > 0 ) {
@@ -75,10 +74,10 @@ config.setCredentialsProvider(new ProfileCredentialsProvider("credentials.proper
             clientCfg.setProxyPort(proxyPort);
         }
         if (profile != null){
-            this.s3 = credentials != null ? new AmazonS3Client(provider, clientCfg) : new AmazonS3Client(clientCfg);
-        this.codedeploy = credentials != null ? new AmazonCodeDeployClient(provider, clientCfg) : new AmazonCodeDeployClient(clientCfg);
-        codedeploy.setRegion(Region.getRegion(Regions.fromName(this.region)));
-        s3.setRegion(Region.getRegion(Regions.fromName(this.region)));
+          //  this.s3 = credentials != null ? new AmazonS3Client(provider, clientCfg) : new AmazonS3Client(clientCfg);
+        //this.codedeploy = credentials != null ? new AmazonCodeDeployClient(provider, clientCfg) : new AmazonCodeDeployClient(clientCfg);
+        //codedeploy.setRegion(Region.getRegion(Regions.fromName(this.region)));
+        //s3.setRegion(Region.getRegion(Regions.fromName(this.region)));
         }
         else { 
             this.s3 = credentials != null ? new AmazonS3Client(credentials, clientCfg) : new AmazonS3Client(clientCfg);
