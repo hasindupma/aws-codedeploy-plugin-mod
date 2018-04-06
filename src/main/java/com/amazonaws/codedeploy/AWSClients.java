@@ -13,6 +13,7 @@
  * permissions and limitations under the License.
  */
 package com.amazonaws.codedeploy;
+package com.amazonaws.auth;
 
 
 import static org.apache.commons.lang.StringUtils.isEmpty;
@@ -45,7 +46,27 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 /**
  * @author gibbon
  */
-public class AWSClients {
+
+/*public class AWSStaticCredentialsProvider implements AWSCredentialsProvider {
+
+    private final AWSCredentials credentials;
+
+    public AWSStaticCredentialsProvider(AWSCredentials credentials) {
+        this.credentials = ValidationUtils.assertNotNull(credentials, "credentials");
+    }
+
+    public AWSCredentials getCredentials() {
+        return credentials;
+    }
+
+    public void refresh() {
+    }
+
+}
+
+*/
+
+public class AWSClients implements AWSCredentialsProvider {
     /**
      * Index in the colon-separated ARN that contains the account id
      * Sample ARN: arn:aws:iam::123456789012:user/David
@@ -54,12 +75,14 @@ public class AWSClients {
 
     public final AmazonCodeDeployClient codedeploy;
     public final AmazonS3Client         s3;
-    public final AWSCredentialsProvider provider;
+    //public final AWSCredentialsProvider provider;
 
     private final String region;
     private final String proxyHost;
     private final int proxyPort;
     private final String profile;
+
+    AWSCredentialsProvider credentialsProvider = new ProfileCredentialsProvider();
 
     public AWSClients(String region, AWSCredentials credentials, String proxyHost, int proxyPort , String profile) {
         this.region = region;
