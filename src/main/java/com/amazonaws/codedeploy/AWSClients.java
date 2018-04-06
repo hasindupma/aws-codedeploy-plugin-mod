@@ -13,7 +13,6 @@
  * permissions and limitations under the License.
  */
 package com.amazonaws.codedeploy;
-package com.amazonaws.auth;
 
 
 import static org.apache.commons.lang.StringUtils.isEmpty;
