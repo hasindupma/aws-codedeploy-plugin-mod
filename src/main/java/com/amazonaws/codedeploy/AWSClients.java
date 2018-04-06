@@ -64,7 +64,7 @@ public class AWSClients {
         this.proxyPort = proxyPort;
         this.profile = profile;
 
-        AWSCredentialsProvider provider = new ProfileCredentialsProvider(profile)    
+        AWSCredentialsProvider provider = new ProfileCredentialsProvider(profile);    
         //setup proxy connection:
         ClientConfiguration clientCfg = new ClientConfiguration();
         if (proxyHost != null && proxyPort > 0 ) {
