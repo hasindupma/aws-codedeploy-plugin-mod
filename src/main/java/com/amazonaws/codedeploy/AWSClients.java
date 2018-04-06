@@ -42,27 +42,11 @@ import com.amazonaws.services.securitytoken.model.AssumeRoleRequest;
 import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import com.amazonaws.services.securitytoken.model.Credentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-
+import com.amazonaws.auth.AWSCredentialsProvider;
 /**
  * @author gibbon
  */
 
-public class AWSStaticCredentialsProvider implements AWSCredentialsProvider {
-
-    private final AWSCredentials credentials;
-
-    public AWSStaticCredentialsProvider(AWSCredentials credentials) {
-        this.credentials = ValidationUtils.assertNotNull(credentials, "credentials");
-    }
-
-    public AWSCredentials getCredentials() {
-        return credentials;
-    }
-
-    public void refresh() {
-    }
-
-}
 
 
 
@@ -71,6 +55,23 @@ public class AWSClients{
      * Index in the colon-separated ARN that contains the account id
      * Sample ARN: arn:aws:iam::123456789012:user/David
      **/
+
+       AWSCredentialsProvider credentialsProvider = new ProfileCredentialsProvider();
+
+        if (credentialsProvider.getCredentials() == null) {
+            File configFile = new File(System.getProperty("user.home"), ".aws/config");
+            throw new RuntimeException("No AWS security credentials found:\n"
+                    + "Make sure you've configured your credentials in: " + configFile.getAbsolutePath() + "\n"
+                    + "For more information on configuring your credentials, see "
+                    + "http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html");
+        }
+
+
+
+
+
+
+
     private static final int ARN_ACCOUNT_ID_INDEX = 4;
 
     public final AmazonCodeDeployClient codedeploy;
@@ -81,8 +82,6 @@ public class AWSClients{
     private final String proxyHost;
     private final int proxyPort;
     private final String profile;
-
-    AWSCredentialsProvider credentialsProvider = new ProfileCredentialsProvider();
 
     public AWSClients(String region, AWSCredentials credentials, String proxyHost, int proxyPort , String profile) {
         this.region = region;
