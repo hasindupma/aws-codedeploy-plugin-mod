@@ -56,7 +56,7 @@ public class AWSClients{
      * Sample ARN: arn:aws:iam::123456789012:user/David
      **/
 
-       AWSCredentialsProvider credentialsProvider = new ProfileCredentialsProvider();
+       AWSCredentialsProvider credentialsProvider = new ProfileCredentialsProvider("pre_prod");
 
        /* if (credentialsProvider.getCredentials() == null) {
             File configFile = new File(System.getProperty("user.home"), ".aws/config");
@@ -96,8 +96,8 @@ public class AWSClients{
             clientCfg.setProxyPort(proxyPort);
         }
     
-        this.s3 = credentials != null ? new AmazonS3Client(credentials, clientCfg) : new AmazonS3Client(clientCfg);
-        this.codedeploy = credentials != null ? new AmazonCodeDeployClient(credentials, clientCfg) : new AmazonCodeDeployClient(clientCfg);
+        this.s3 = credentialsProvider != null ? new AmazonS3Client(credentialsProvider, clientCfg) : new AmazonS3Client(clientCfg);
+        this.codedeploy = credentialsProvider != null ? new AmazonCodeDeployClient(credentialsProvider, clientCfg) : new AmazonCodeDeployClient(clientCfg);
         codedeploy.setRegion(Region.getRegion(Regions.fromName(this.region)));
         s3.setRegion(Region.getRegion(Regions.fromName(this.region)));
         
