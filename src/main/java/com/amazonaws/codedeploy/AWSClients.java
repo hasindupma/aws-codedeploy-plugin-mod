@@ -39,7 +39,7 @@ import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
 import com.amazonaws.services.securitytoken.model.AssumeRoleRequest;
 import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import com.amazonaws.services.securitytoken.model.Credentials;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.auth.profile.*;
 
 /**
  * @author gibbon
@@ -65,7 +65,7 @@ public class AWSClients {
         this.proxyHost = proxyHost;
         this.proxyPort = proxyPort;
         this.profile = profile;
-
+config.setCredentialsProvider(new ProfileCredentialsProvider("credentials.properties", "myprofile"));
         provider = new ProfileCredentialsProvider(profile);    
         //setup proxy connection:
         ClientConfiguration clientCfg = new ClientConfiguration();
